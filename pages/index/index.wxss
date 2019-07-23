@@ -1,6 +1,5 @@
 /* pages/WCAvailable/WCAvailable.wxss */
 .selector_title{
-  margin-bottom: 20rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,17 +11,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 90rpx;
-  font-size: 25px;
+  font-size: 6.5vw;
+
 }
 
 .button{
+  margin-left: 35%;
+  margin-top:5%;
+  margin-bottom: 5%;
   position: relative;
   text-align: center;
-  top: 3rpx;
-  box-shadow:0px 0px 10px #bbbec4 inset; 
-  width: 50%;
-  border-radius: 98rpx;
+  vertical-align: middle;
+  top: 10%;
+  background-color:rgb(255, 136, 0);
+  color:white;
+  width: 25%;
+  padding-bottom: 2%;
+  padding-top:2%;
+  border-radius: 10rpx;
+  font-size:4vw;
 }
 
 .table{

@@ -1,7 +1,7 @@
 <!--Components/WCs.wxml-->
 <view class="tr">
-  <view class="td td1">{{floor}}-{{side}} {{gender}}</view>
-  <view class="td td2" wx:for="{{numbers}}" wx:key="key" wx:for-item = "value"> 
+  <view class="td td1">{{line[1]}}F-{{sideArray[line[2]|Int]}} {{genderArray[line[3]|Int]}}</view>
+  <view class="td td2" wx:for="{{cubicles}}" wx:key="key" wx:for-item = "value"> 
     <image wx:if="{{value == true}}" class="toilet" src="/images/Green.png"></image>
     <text wx:if="{{value == true}}" class="text green">空闲</text>
     <image wx:if="{{value == false}}" class="toilet redFilter" src="/images/Green.png"></image>

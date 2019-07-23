@@ -5,19 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    gender:"Male",
-    building:"01",
+    genderIndex:0,
+    floorIndex:0,
     cubicles: {},
-    cubiclesInfo:[],
-    genderArray:["Male","Female"],
-    sideArray:["LW","SW"],
-    buildingArray: ["01", "05", "06"],
+    allCubiclesInfo:{},
+    filteredCubiclesInfo:{},
+    genderArray:["Both","Male","Female"],
+    floorArray: ["All","1", "2", "3","4","5"],
   },
   bindChange: function (e) {
     const val = e.detail.value
     this.setData({
-      building: this.data.building[val[0]],
-      gender: this.data.gender[val[1]]
+      floorIndex:val[0],
+      genderIndex: val[1]
     })
   },  
 
@@ -29,40 +29,22 @@ Page({
     myThis.setData({
       cubicles: response.data["cubicles"]
     })
-
-    var previous = 0
-    var lineInfo = {}
-    var finalCubicleInfo = []
-    for (var cubicle in myThis.data.cubicles) {
-      var line = parseInt(cubicle.substring(0, 4))
-      var list = []
-      for (var i = 0; i < cubicle.length; i++) {
-        list.push(parseInt(cubicle[i]))
+    var finalCubicleMap ={}
+    for(var cubicle in myThis.data.cubicles){
+      var line = cubicle.substring(0,4)
+      if(finalCubicleMap[line]==undefined){
+        finalCubicleMap[line]={} 
       }
-      if (line != previous) {
-        previous = line;
-        lineInfo = {
-          building: list[0],
-          floor: list[1],
-          gender: myThis.data.genderArray[list[3] - 1],
-          side: myThis.data.sideArray[list[2] - 1],
-          numbers: [myThis.data.cubicles[cubicle]]
-        }
-        finalCubicleInfo.push(lineInfo)
-      }
-      else {
-        lineInfo.numbers.push(myThis.data.cubicles[cubicle])
-      }
+      finalCubicleMap[line][cubicle[4]]=myThis.data.cubicles[cubicle]
     }
+    console.log(finalCubicleMap)
     myThis.setData({
-      cubiclesInfo: finalCubicleInfo
+      allCubiclesInfo:finalCubicleMap,
+      filteredCubiclesInfo:finalCubicleMap
     })
+
   },
   onLoad: function (options) {
-      this.setData({
-        gender:options.gender,
-        building:options.building,
-      })
       var myThis = this;
       wx.request({
         url: 'https://wca-server.azurewebsites.net/getCubicles',
@@ -70,7 +52,24 @@ Page({
           myThis.updateInfo(response)
         }
       })
-
+  },
+  filterWC:function(){
+    var myThis = this
+    var newArray ={}
+    for(var c in myThis.data.allCubiclesInfo){
+      if(myThis.data.floorIndex!=0){
+        if(myThis.data.floorIndex.toString()!=c[1])
+          continue
+      }
+      if (myThis.data.genderIndex!=0){
+        if (myThis.data.genderIndex.toString() != c[3])
+          continue 
+      }
+      newArray[c] = myThis.data.allCubiclesInfo[c]
+    }
+    myThis.setData({
+      filteredCubiclesInfo:newArray
+    })
   },
 
   onShareAppMessage: function () {

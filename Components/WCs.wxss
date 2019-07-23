@@ -10,13 +10,14 @@
   display: inline-block;
   text-align: left;
   font-size: 25rpx;
-  color: black;
+  color: darkslategrey;
 }
 .td1{
   width:25%;
   padding-top:4%;
   text-align: center;
-  font-size:120%;
+  font-size:3.8vw;
+  font-weight:600;
 }
 .td2{
   width:30%;
@@ -30,8 +31,8 @@
   filter: contrast(1.33) hue-rotate(199deg) saturate(3) ;
 }
 .text{
-  font-size:120%;
-  padding-left: 18%;
+  font-size:4vw;
+  padding-left: 14%;
   font-weight: bold;
 }
 .green{
