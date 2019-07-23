@@ -1,0 +1,43 @@
+/* Components/WCs.wxss */
+.tr{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5%;
+}
+.td{
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+  font-size: 25rpx;
+  color: black;
+}
+.td1{
+  width:25%;
+  padding-top:4%;
+  text-align: center;
+  font-size:120%;
+}
+.td2{
+  width:30%;
+  padding-bottom:15%;
+}
+.toilet{
+  width: 70%; 
+  height: 180%;
+}
+.redFilter { 
+  filter: contrast(1.33) hue-rotate(199deg) saturate(3) ;
+}
+.text{
+  font-size:120%;
+  padding-left: 18%;
+  font-weight: bold;
+}
+.green{
+  color: green;
+}
+
+.red{
+  color:red;
+}
