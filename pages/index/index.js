@@ -71,6 +71,9 @@ Page({
     //监听WebSocket接受到服务器的消息事件。
     wx.onSocketMessage(function (res) {
       console.log('收到服务器内容：', res);
+      var jsonStr = res.data.replace(" ", "").replace(/\ufeff/g, "");
+      var jj = JSON.parse(jsonStr);
+      res.data = jj;
       that.updateInfo(res)
     });
     //监听WebSocket错误。
