@@ -1,4 +1,5 @@
 // pages/WCAvailable/WCAvailable.js
+
 Page({
 
   /**
@@ -39,10 +40,10 @@ Page({
     }
     console.log(finalCubicleMap)
     myThis.setData({
-      allCubiclesInfo:finalCubicleMap,
-      filteredCubiclesInfo:finalCubicleMap
+      allCubiclesInfo:finalCubicleMap
     })
-
+    console.log("Update Cubicle Info "+finalCubicleMap)
+    myThis.filterWC()
   },
   onLoad: function (options) {
       var myThis = this;
@@ -52,9 +53,34 @@ Page({
           myThis.updateInfo(response)
         }
       })
+    myThis.wssInit();       
+  },
+  wssInit() {
+    var that = this;
+    //建立连接
+    wx.connectSocket({
+      url: 'ws://wca-server.azurewebsites.net'//app.appData.socket
+    })
+    //监听WebSocket连接打开事件。
+    wx.onSocketOpen(function (res) {
+      console.log('WebSocket连接已打开！');
+      that.setData({
+        socket_open: true
+      });
+    });
+    //监听WebSocket接受到服务器的消息事件。
+    wx.onSocketMessage(function (res) {
+      console.log('收到服务器内容：', res);
+      that.updateInfo(res)
+    });
+    //监听WebSocket错误。
+    wx.onSocketError(function (res) {
+      console.log('WebSocket连接打开失败，请检查！', res)
+    });
   },
   filterWC:function(){
     var myThis = this
+    console.log("Filtering: Floor"+myThis.data.floorIndex+" "+myThis.data.genderArray[myThis.data.genderIndex])
     var newArray ={}
     for(var c in myThis.data.allCubiclesInfo){
       if(myThis.data.floorIndex!=0){
