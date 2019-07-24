@@ -48,7 +48,7 @@ Page({
   onLoad: function (options) {
       var myThis = this;
       wx.request({
-        url: 'https://wca-server.azurewebsites.net/getCubicles',
+        url: 'https://lm.monogogo.cn/zaozao/getcubicles',
         success: function(response){ 
           myThis.updateInfo(response)
         }
@@ -59,7 +59,7 @@ Page({
     var that = this;
     //建立连接
     wx.connectSocket({
-      url: 'ws://wca-server.azurewebsites.net'//app.appData.socket
+      url: 'wss://lm.monogogo.cn/wsapp/'//app.appData.socket
     })
     //监听WebSocket连接打开事件。
     wx.onSocketOpen(function (res) {
@@ -83,7 +83,7 @@ Page({
   },
   filterWC:function(){
     var myThis = this
-    console.log("Filtering: Floor"+myThis.data.floorIndex+" "+myThis.data.genderArray[myThis.data.genderIndex])
+    console.log("Filtering: Floor "+myThis.data.floorIndex+" "+myThis.data.genderArray[myThis.data.genderIndex])
     var newArray ={}
     for(var c in myThis.data.allCubiclesInfo){
       if(myThis.data.floorIndex!=0){

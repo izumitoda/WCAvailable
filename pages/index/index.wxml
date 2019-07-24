@@ -13,7 +13,7 @@
         </picker-view-column>               
     </picker-view>    
 </view>
-<view class='button' bindtap='filterWC'>Find  WC</view>
+<view class='button' bindtap='filterWC' id="WC">Find  WC</view>
 
 <scroll-view class="WCSearch_content">
   <view class="table">
